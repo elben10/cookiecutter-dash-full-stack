@@ -1,6 +1,8 @@
 .vscode
 dev-project
 poetry.lock
+package-lock.json
+node_modules
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
