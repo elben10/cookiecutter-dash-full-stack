@@ -1,21 +1,22 @@
+# flake8: noqa E501
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output, State, ALL
+from dash.dependencies import ALL, Input, Output, State
 from dash.exceptions import PreventUpdate
 
 from app.app import app
-from app.components.wrappers import main_wrapper
 from app.components.tables import (
     calculate_number_of_pages,
-    table,
     generate_entries_text,
     generate_pagination,
+    table,
 )
+from app.components.wrappers import main_wrapper
 from app.crud import CRUDUser
 from app.db.session import SessionLocal
 from app.utils import get_trigger_id, get_trigger_index
-
 
 column_definitions = [
     {"title": "ID"},

@@ -1,23 +1,14 @@
+# flake8: noqa E501
+
 import dash_core_components as dcc
 import dash_html_components as html
-
 from flask_login import current_user
 
 
 def sidebar(sidebar_context):
     return html.Ul(
         [
-            dcc.Link(
-                [
-                    html.Div(
-                        html.I(className="fas fa-laugh-wink"),
-                        className="sidebar-brand-icon rotate-n-15",
-                    ),
-                    html.Div("SB Admin", className="sidebar-brand-text mx-3"),
-                ],
-                className="sidebar-brand d-flex align-items-center justify-content-center",
-                href="/",
-            ),
+            logo_item(),
             html.Hr(className="sidebar-divider my-0"),
             *(
                 [
@@ -43,8 +34,22 @@ def sidebar(sidebar_context):
     )
 
 
+def logo_item():
+    return dcc.Link(
+        [
+            html.Div(
+                html.I(className="fas fa-laugh-wink"),
+                className="sidebar-brand-icon rotate-n-15",
+            ),
+            html.Div("SB Admin", className="sidebar-brand-text mx-3"),
+        ],
+        className="sidebar-brand d-flex align-items-center justify-content-center",
+        href="/",
+    )
+
+
 def sidebar_item(title, icon, href, active=False):
-    class_name = f"nav-item" + (" active" if active else "")
+    class_name = "nav-item" + (" active" if active else "")
     return html.Li(
         dcc.Link(
             [html.I(className=icon), html.Span(title)],

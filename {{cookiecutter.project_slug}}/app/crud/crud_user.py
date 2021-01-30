@@ -1,5 +1,5 @@
-from app.encoders import jsonable_encoder
 from app.db_models import User
+from app.encoders import jsonable_encoder
 from app.security import get_password_hash, verify_password
 
 

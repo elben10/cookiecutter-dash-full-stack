@@ -1,3 +1,5 @@
+# flake8: noqa E501
+
 import dash_html_components as html
 
 
@@ -14,7 +16,7 @@ def notification(id):
                         ),
                     ],
                     className="toast-header bg-primary text-white",
-                    id=f"{id}HeaderContainer"
+                    id=f"{id}HeaderContainer",
                 ),
                 html.Div(
                     id=f"{id}Body",

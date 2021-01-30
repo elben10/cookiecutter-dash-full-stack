@@ -7,7 +7,7 @@ from dash.exceptions import PreventUpdate
 from flask_login import current_user, logout_user
 
 from app import views
-from app.app import app, server
+from app.app import app, server  # noqa: F401
 from app.crud import CRUDUser
 from app.db.session import SessionLocal
 

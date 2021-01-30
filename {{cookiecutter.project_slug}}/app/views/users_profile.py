@@ -1,3 +1,5 @@
+# flake8: noqa E501
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -228,7 +230,7 @@ def update_profile_information(n_clicks_save, _, full_name):
     ],
     prevent_initial_call=True,
 )
-def update_profile_information(n_clicks_save, _, old_password, password, password2):
+def update_password(n_clicks_save, _, old_password, password, password2):
     noti_class = "toast-header bg-primary text-white"
     if triggered_by_id(
         dash.callback_context.triggered, "usersProfilePasswordNotificationClose"

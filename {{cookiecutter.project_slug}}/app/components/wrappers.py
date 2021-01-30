@@ -1,4 +1,7 @@
+# flake8: noqa E501
+
 import dash_html_components as html
+
 from app.components.navigation import navigation
 from app.components.sidebar import sidebar
 
