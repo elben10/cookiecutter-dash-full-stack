@@ -1,3 +1,5 @@
+# flake8: noqa E501
+
 import math
 
 import dash_core_components as dcc
@@ -29,7 +31,6 @@ def table(
                                         ],
                                         value=table_sizes[0],
                                         id=f"{id}TableSize",
-                                        
                                     ),
                                     " entries",
                                 ],

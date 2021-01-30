@@ -7,4 +7,5 @@ set -e
 
 rm -fr ./\{\{cookiecutter.project_slug\}\}/app
 
-rsync -a --exclude=./dev-project/{.env} ./dev-project/* ./\{\{cookiecutter.project_slug\}\}/
+rsync -a --exclude=README.md ./dev-project/* ./\{\{cookiecutter.project_slug\}\}/
+rsync -a ./dev-project/.flake8 ./\{\{cookiecutter.project_slug\}\}/

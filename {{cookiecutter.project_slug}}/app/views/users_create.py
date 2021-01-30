@@ -1,6 +1,11 @@
+# flake8: noqa E501
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output, State
+from pydantic import ValidationError
+
 from app.app import app
 from app.components.cards import grid_card
 from app.components.notification import notification
@@ -10,8 +15,6 @@ from app.db.session import SessionLocal
 from app.schemas import UserCreate
 from app.schemas.utils import get_error_message
 from app.utils import triggered_by_id
-from dash.dependencies import Input, Output, State
-from pydantic import ValidationError
 
 
 def layout(sidebar_context):

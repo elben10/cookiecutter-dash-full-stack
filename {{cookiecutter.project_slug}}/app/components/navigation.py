@@ -1,6 +1,9 @@
+# flake8: noqa E501
+
 import dash_core_components as dcc
 import dash_html_components as html
 from flask_login import current_user
+
 
 def navigation():
     return html.Nav(
@@ -18,7 +21,9 @@ def navigation():
                             html.A(
                                 [
                                     html.Span(
-                                        current_user.full_name if current_user.full_name else current_user.email,
+                                        current_user.full_name
+                                        if current_user.full_name
+                                        else current_user.email,
                                         className="mr-2 d-none d-lg-inline text-gray-600 small",
                                     ),
                                     html.I(className="fas fa-user d-lg-none d-inline"),
