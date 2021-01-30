@@ -17,7 +17,7 @@ jobs:
     - name: Install poetry
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-        source $HOME/.poetry/env
+        echo "$HOME/.poetry/bin" >> $GITHUB_PATH
         pip install cookiecutter
     - name: Test
       run: bash scripts/test.sh
