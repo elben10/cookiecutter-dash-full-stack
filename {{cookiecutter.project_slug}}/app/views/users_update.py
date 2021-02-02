@@ -6,6 +6,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
+from flask_login import current_user
 from pydantic import ValidationError
 
 from app.app import app
@@ -178,6 +180,8 @@ def layout(sidebar_context, user):
 def update_user(
     _, __, ___, pathname, full_name, email, password, password2, check_list
 ):
+    if not current_user.is_superuser:
+        raise PreventUpdate()
     noti_class = "toast-header bg-primary text-white"
     user_id = re.match(r"^/users/(\d+)", pathname).group(1)
     if triggered_by_id(

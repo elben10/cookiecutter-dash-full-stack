@@ -1,6 +1,7 @@
 from dash import Dash
 from flask_login import LoginManager
 
+from app.auth.flask_login import FlaskLogin
 from app.config import config
 from app.crud import CRUDUser
 from app.db.session import SessionLocal
@@ -20,6 +21,7 @@ app = Dash(
     external_stylesheets=CSS,
     suppress_callback_exceptions=True,
 )
+auth = FlaskLogin(app)
 server = app.server
 
 server.config.update(
