@@ -4,6 +4,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
+from flask_login import current_user
 from pydantic import ValidationError
 
 from app.app import app
@@ -159,6 +161,8 @@ def layout(sidebar_context):
     prevent_initial_call=True,
 )
 def create_user(_, __, full_name, email, password, password2, check_list):
+    if not current_user.is_superuser:
+        raise PreventUpdate()
     noti_class = "toast-header bg-primary text-white"
     if triggered_by_id(
         dash.callback_context.triggered, "userCreateFormNotificationClose"

@@ -12,7 +12,7 @@ cd test
 poetry install
 
 poetry run bash scripts/lint.sh
-poetry run bash scripts/test.sh
+poetry run bash scripts/test.sh $@
 
 cd ..
 rm -rf ./test

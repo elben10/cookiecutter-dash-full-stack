@@ -25,30 +25,27 @@ sidebar_context = [
 
 @app.callback(Output("content", "children"), [Input("urlNoRefresh", "pathname")])
 def route(pathname):
-    if current_user.is_authenticated:
-        if pathname == "/":
-            return views.home.layout(sidebar_context)
-        elif pathname == "/users/profile":
-            return views.users_profile.layout(sidebar_context)
-        if current_user.is_superuser:
-            if pathname == "/users":
-                return views.users.layout(sidebar_context)
-            elif pathname == "/users/create":
-                return views.users_create.layout(sidebar_context)
-            elif re.match(r"^/users/\d+", pathname):
-                user_id = re.match(r"^/users/(\d+)", pathname).group(1)
-                db = SessionLocal()
-                try:
-                    user = CRUDUser.get(db, id=user_id)
-                finally:
-                    db.close()
-                if user:
-                    return views.users_update.layout(sidebar_context, user)
-                else:
-                    return views.error.layout(sidebar_context)
-        return views.error.layout(sidebar_context)
-    else:
-        return views.login.layout(sidebar_context)
+    if pathname == "/":
+        return views.home.layout(sidebar_context)
+    elif pathname == "/users/profile":
+        return views.users_profile.layout(sidebar_context)
+    if current_user.is_superuser:
+        if pathname == "/users":
+            return views.users.layout(sidebar_context)
+        elif pathname == "/users/create":
+            return views.users_create.layout(sidebar_context)
+        elif re.match(r"^/users/\d+", pathname):
+            user_id = re.match(r"^/users/(\d+)", pathname).group(1)
+            db = SessionLocal()
+            try:
+                user = CRUDUser.get(db, id=user_id)
+            finally:
+                db.close()
+            if user:
+                return views.users_update.layout(sidebar_context, user)
+            else:
+                return views.error.layout(sidebar_context)
+    return views.error.layout(sidebar_context)
 
 
 @app.callback(Output("urlRefresh", "href"), [Input("navigationLogout", "n_clicks")])
@@ -57,3 +54,7 @@ def logout(n_clicks):
         raise PreventUpdate()
     logout_user()
     return "/"
+
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
