@@ -221,7 +221,7 @@
                 display: block;
                 width: 100%;
                 text-align: left;
-                padding: 1rem;
+                padding: 0.5rem 1rem;
                 width: $sidebar-base-width;
 
                 i {
@@ -265,6 +265,8 @@
         }
 
         .sidebar-heading {
+            color: white;
+            padding: 0.3rem 1rem;
             text-align: left;
         }
 
