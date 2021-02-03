@@ -1,6 +1,8 @@
 # flake8: noqa E501
-
+import dash_core_components as dcc
 import dash_html_components as html
+from dash_core_components.Tab import Tab
+from dash_core_components.Tabs import Tabs
 
 
 def card(key, value, icon, color="primary"):
@@ -68,4 +70,28 @@ def grid_card(title, element, dropdown_options=None):
             html.Div(element, className="card-body"),
         ],
         className="card shadow mb-4 h-100",
+    )
+
+
+def tab_card(element, id, elements, value=None):
+    return html.Div(
+        [
+            dcc.Tabs(
+                [
+                    dcc.Tab(
+                        label=element["label"],
+                        value=element["value"],
+                        className="tab-card",
+                        selected_className="tab-card-enabled",
+                        disabled_className="tab-card-disabled",
+                    )
+                    for element in elements
+                ],
+                id=id,
+                value=value,
+            ),
+            html.Div(element, className="card-body", id=f"{id}Body"),
+        ],
+        className="card shadow mb-4 h-100",
+        style={"overflow": "hidden"},
     )
