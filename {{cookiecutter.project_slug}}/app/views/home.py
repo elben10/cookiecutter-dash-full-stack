@@ -3,8 +3,52 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
-from app.components.cards import card, grid_card
+from app.components.cards import card, grid_card, tab_card
 from app.components.wrappers import main_wrapper
+
+graph = dcc.Graph(
+    figure={
+        "layout": {"margin": {"t": 10, "l": 20, "r": 20, "b": 20}},
+        "data": [
+            {
+                "uid": "45c0a4",
+                "line": {
+                    "color": "rgb(255, 127, 14)",
+                    "shape": "spline",
+                    "width": 3,
+                },
+                "mode": "lines",
+                "name": "iOS & Android",
+                "type": "scatter",
+                "x": [
+                    "2007-12-01",
+                    "2008-12-01",
+                    "2009-12-01",
+                    "2010-12-01",
+                    "2011-12-01",
+                    "2012-12-01",
+                    "2013-12-01",
+                    "2014-12-01",
+                    "2015-12-01",
+                ],
+                "y": [
+                    "0",
+                    "45560506.663365364",
+                    "91145081.21192169",
+                    "232447635.15836716",
+                    "580348915.5698586",
+                    "1182888421.2842617",
+                    "1928559640.2194986",
+                    "2578825762.2643065",
+                    "3022276546.8773637",
+                ],
+            }
+        ],
+    },
+    className="h-100",
+    style={"minHeight": "100px"},
+    responsive=True,
+)
 
 
 def layout(sidebar_context):
@@ -55,54 +99,24 @@ def layout(sidebar_context):
             html.Div(
                 grid_card(
                     "Graph",
-                    dcc.Graph(
-                        figure={
-                            "layout": {"margin": {"t": 10, "l": 20, "r": 20, "b": 20}},
-                            "data": [
-                                {
-                                    "uid": "45c0a4",
-                                    "line": {
-                                        "color": "rgb(255, 127, 14)",
-                                        "shape": "spline",
-                                        "width": 3,
-                                    },
-                                    "mode": "lines",
-                                    "name": "iOS & Android",
-                                    "type": "scatter",
-                                    "x": [
-                                        "2007-12-01",
-                                        "2008-12-01",
-                                        "2009-12-01",
-                                        "2010-12-01",
-                                        "2011-12-01",
-                                        "2012-12-01",
-                                        "2013-12-01",
-                                        "2014-12-01",
-                                        "2015-12-01",
-                                    ],
-                                    "y": [
-                                        "0",
-                                        "45560506.663365364",
-                                        "91145081.21192169",
-                                        "232447635.15836716",
-                                        "580348915.5698586",
-                                        "1182888421.2842617",
-                                        "1928559640.2194986",
-                                        "2578825762.2643065",
-                                        "3022276546.8773637",
-                                    ],
-                                }
-                            ],
-                        },
-                        className="h-100",
-                        style={"minHeight": "250px"},
-                        responsive=True,
-                    ),
+                    graph,
                 ),
                 className="col-12 col-md-6 pt-2 pb-4",
-            )
-        ]
-        * 2,
+            ),
+            html.Div(
+                tab_card(
+                    graph,
+                    id="tabId",
+                    elements=[
+                        {"label": "Option 1", "value": "0"},
+                        {"label": "Option 2", "value": "1"},
+                        {"label": "Option 3", "value": "2"},
+                    ],
+                    value="0",
+                ),
+                className="col-12 col-md-6 pt-2 pb-4",
+            ),
+        ],
         className="row flex-grow-1",
     )
 
