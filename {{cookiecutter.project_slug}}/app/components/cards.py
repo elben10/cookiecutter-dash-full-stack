@@ -5,7 +5,7 @@ from dash_core_components.Tab import Tab
 from dash_core_components.Tabs import Tabs
 
 
-def card(key, value, icon, color="primary"):
+def card(key, icon, value=None, color="primary", id=None):
     return html.Div(
         html.Div(
             html.Div(
@@ -18,6 +18,7 @@ def card(key, value, icon, color="primary"):
                             ),
                             html.Div(
                                 value,
+                                id=id if id else "",
                                 className="h5 mb-0 font-weight-bold text-gray-800",
                             ),
                         ],
@@ -67,7 +68,11 @@ def grid_card(title, element, dropdown_options=None):
                 ],
                 className="card-header py-3 d-flex flex-row align-items-center justify-content-between",
             ),
-            html.Div(element, className="card-body"),
+            dcc.Loading(
+                html.Div(element, className="card-body h-100"),
+                parent_className="h-100",
+                color="var(--primary)",
+            ),
         ],
         className="card shadow mb-4 h-100",
     )
@@ -90,7 +95,11 @@ def tab_card(element, id, elements, value=None):
                 id=id,
                 value=value,
             ),
-            html.Div(element, className="card-body", id=f"{id}Body"),
+            dcc.Loading(
+                html.Div(element, className="card-body h-100", id=f"{id}Body"),
+                parent_className="h-100",
+                color="var(--primary)",
+            ),
         ],
         className="card shadow mb-4 h-100",
         style={"overflow": "hidden"},
