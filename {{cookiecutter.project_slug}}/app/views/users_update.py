@@ -131,7 +131,7 @@ def layout(sidebar_context, user):
                     "Save", className="btn btn-primary me-2", id="usersUpdateSave"
                 ),
                 html.Button(
-                    "Delete", className="btn btn-danger me-2", id="usersUpdateDelete"
+                    "Delete", className="btn btn-danger me-2 text-white", id="usersUpdateDelete"
                 ),
             ],
             className="d-flex",
