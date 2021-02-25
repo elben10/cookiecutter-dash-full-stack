@@ -36,7 +36,7 @@ def layout(sidebar_context):
                     placeholder="Enter your full name...",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -57,7 +57,7 @@ def layout(sidebar_context):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -78,7 +78,7 @@ def layout(sidebar_context):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -99,7 +99,7 @@ def layout(sidebar_context):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             dcc.Checklist(
@@ -118,7 +118,7 @@ def layout(sidebar_context):
                 labelClassName="me-3",
                 id="usersCreateCheckboxes",
             ),
-            className="form-group",
+            className="mb-2",
         ),
         html.Button("Save", className="btn btn-primary", id="usersCreateSave"),
     ]

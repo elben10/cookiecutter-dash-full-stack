@@ -40,7 +40,7 @@ def layout(sidebar_context, user):
                     value=user.full_name,
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -61,7 +61,7 @@ def layout(sidebar_context, user):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -82,7 +82,7 @@ def layout(sidebar_context, user):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
@@ -103,7 +103,7 @@ def layout(sidebar_context, user):
                     className="invalid-feedback d-flex",
                 ),
             ],
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             dcc.Checklist(
@@ -123,7 +123,7 @@ def layout(sidebar_context, user):
                 labelClassName="me-3",
                 id="usersUpdateCheckboxes",
             ),
-            className="form-group",
+            className="mb-2",
         ),
         html.Div(
             [
