@@ -119,8 +119,8 @@ def layout(sidebar_context, user):
                 ],
                 value=(["IsActive"] if user.is_active else [])
                 + (["IsSuperuser"] if user.is_superuser else []),
-                inputClassName="mr-2",
-                labelClassName="mr-3",
+                inputClassName="me-2",
+                labelClassName="me-3",
                 id="usersUpdateCheckboxes",
             ),
             className="form-group",
@@ -128,10 +128,10 @@ def layout(sidebar_context, user):
         html.Div(
             [
                 html.Button(
-                    "Save", className="btn btn-primary mr-2", id="usersUpdateSave"
+                    "Save", className="btn btn-primary me-2", id="usersUpdateSave"
                 ),
                 html.Button(
-                    "Delete", className="btn btn-danger mr-2", id="usersUpdateDelete"
+                    "Delete", className="btn btn-danger me-2", id="usersUpdateDelete"
                 ),
             ],
             className="d-flex",

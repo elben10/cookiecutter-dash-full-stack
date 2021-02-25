@@ -14,15 +14,15 @@ def card(key, icon, value=None, color="primary", id=None):
                         [
                             html.Div(
                                 key,
-                                className=f"text-xs font-weight-bold text-{color} text-uppercase mb-1",
+                                className=f"text-xs fw-bold text-{color} text-uppercase mb-1",
                             ),
                             html.Div(
                                 value,
                                 id=id if id else "",
-                                className="h5 mb-0 font-weight-bold text-gray-800",
+                                className="h5 mb-0 fw-bold text-gray-800",
                             ),
                         ],
-                        className="col mr-2",
+                        className="col me-2",
                     ),
                     html.Div(html.I(className=icon), className="col-auto"),
                 ],
@@ -39,7 +39,7 @@ def grid_card(title, element, dropdown_options=None):
         [
             html.Div(
                 [
-                    html.H6(title, className="m-0 font-weight-bold text-primary"),
+                    html.H6(title, className="m-0 fw-bold text-primary"),
                     html.Div(
                         [
                             html.Div(
@@ -71,7 +71,7 @@ def grid_card(title, element, dropdown_options=None):
             dcc.Loading(
                 html.Div(element, className="card-body h-100"),
                 parent_className="h-100",
-                color="var(--primary)",
+                color="var(--bs-primary)",
             ),
         ],
         className="card shadow mb-4 h-100",
@@ -98,7 +98,7 @@ def tab_card(element, id, elements, value=None):
             dcc.Loading(
                 html.Div(element, className="card-body h-100", id=f"{id}Body"),
                 parent_className="h-100",
-                color="var(--primary)",
+                color="var(--bs-primary)",
             ),
         ],
         className="card shadow mb-4 h-100",

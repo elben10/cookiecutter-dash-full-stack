@@ -11,7 +11,7 @@ def navigation():
             html.Button(
                 html.I(className="fa fa-bars"),
                 id="sidebarToggleTop",
-                className="btn btn-link d-md-none rounded-circle mr-3",
+                className="btn btn-link d-md-none rounded-circle me-3",
             ),
             html.Ul(
                 [
@@ -24,7 +24,7 @@ def navigation():
                                         current_user.full_name
                                         if current_user.full_name
                                         else current_user.email,
-                                        className="mr-2 d-none d-lg-inline text-gray-600 small",
+                                        className="me-2 d-none d-lg-inline text-gray-600 small",
                                     ),
                                     html.I(className="fas fa-user d-lg-none d-inline"),
                                 ],
@@ -43,7 +43,7 @@ def navigation():
                                     dcc.Link(
                                         [
                                             html.I(
-                                                className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"
+                                                className="fas fa-user fa-sm fa-fw me-2 text-gray-400"
                                             ),
                                             "Profile",
                                         ],
@@ -54,7 +54,7 @@ def navigation():
                                     html.Button(
                                         [
                                             html.I(
-                                                className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                                                className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"
                                             ),
                                             "Logout",
                                         ],
@@ -69,7 +69,7 @@ def navigation():
                         className="nav-item dropdown no-arrow",
                     ),
                 ],
-                className="navbar-nav ml-auto",
+                className="navbar-nav ms-auto",
             ),
         ],
         className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow",

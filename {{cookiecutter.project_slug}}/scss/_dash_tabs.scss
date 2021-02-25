@@ -7,7 +7,7 @@
   overflow: hidden !important;
   span {
     @extend .m-0;
-    @extend .font-weight-bold;
+    @extend .fw-bold;
     @extend .text-primary;
   }
   &:not(:last-child) {

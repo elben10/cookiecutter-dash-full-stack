@@ -9,10 +9,10 @@ def notification(id):
             [
                 html.Div(
                     [
-                        html.I(className="fas fa-exclamation-circle mr-2"),
-                        html.Span(id=f"{id}Header", className="mr-auto"),
+                        html.I(className="fas fa-exclamation-circle me-2"),
+                        html.Span(id=f"{id}Header", className="me-auto"),
                         html.Button(
-                            "x", className="ml-2 mb-1 close text-white", id=f"{id}Close"
+                            "x", className="ms-2 mb-1 close text-white", id=f"{id}Close"
                         ),
                     ],
                     className="toast-header bg-primary text-white",

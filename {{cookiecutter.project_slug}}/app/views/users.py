@@ -28,7 +28,7 @@ def layout(sidebar_context):
         [
             html.H1("Users", className="h3 mb-0 text-gray-800"),
             dcc.Link(
-                [html.I(className="fa fa-plus pr-2"), "Create User"],
+                [html.I(className="fa fa-plus pe-2"), "Create User"],
                 className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm",
                 href="/users/create",
             ),
