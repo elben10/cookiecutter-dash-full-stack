@@ -5,26 +5,21 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import ALL, Input, Output, State
 from dash.exceptions import PreventUpdate
+from dash_data_table import DashDataTable
 
 from app.app import app
-from app.components.tables import (
-    calculate_number_of_pages,
-    generate_entries_text,
-    generate_pagination,
-    table,
-)
 from app.components.wrappers import main_wrapper
 from app.crud import CRUDUser
 from app.db.session import SessionLocal
 from app.utils import get_trigger_id, get_trigger_index
 
 column_definitions = [
-    {"title": "ID"},
-    {"title": "Full Name"},
-    {"title": "Email"},
-    {"title": "Is Active"},
-    {"title": "Is Superuser"},
-    {"title": "Update User"},
+    {"name": "ID", "selector": "id"},
+    {"name": "Full Name", "selector": "full_name"},
+    {"name": "Email", "selector": "email"},
+    {"name": "Is Active", "selector": "is_active", "type": "checkbox"},
+    {"name": "Is Superuser", "selector": "is_superuser", "type": "checkbox"},
+    {"name": "Update User", "selector": "update_user", "type": "button"},
 ]
 
 
@@ -40,72 +35,45 @@ def layout(sidebar_context):
         ],
         className="d-sm-flex align-items-center justify-content-between mb-4",
     )
-    table_ = table("users", column_definitions)
     return main_wrapper(
-        [title_row, table_],
+        [
+            title_row,
+            DashDataTable(
+                id="usersTable",
+                columns=column_definitions,
+                persistTableHead=True,
+                paginationServer=True,
+            ),
+        ],
         sidebar_context,
     )
 
 
 @app.callback(
-    [
-        Output("usersBody", "children"),
-        Output("usersEntriesText", "children"),
-        Output("usersPagination", "children"),
-        Output("usersPageStore", "data"),
-    ],
-    [
-        Input("usersTableSize", "value"),
-        Input({"type": "usersItemPagination", "index": ALL}, "n_clicks"),
-    ],
-    [State("usersPageStore", "data")],
+    Output("usersTable", "data"),
+    Output("usersTable", "paginationTotalRows"),
+    Input("usersTable", "currentPage"),
+    Input("usersTable", "currentRowsPerPage"),
 )
-def update_table(value, _, page_store):
+def update_table(page, rows_per_page):
+    page = page if page else 1
+    rows_per_page = rows_per_page if rows_per_page else 10
     db = SessionLocal()
-
     try:
-        users = CRUDUser.get_multi(db, limit=value)
-        n_rows = CRUDUser.count(db)
-        if get_trigger_id(dash.callback_context.triggered) == "usersItemPagination":
-            index = get_trigger_index(dash.callback_context.triggered)
-            total_pages = calculate_number_of_pages(n_rows, value)
-            if index == page_store["page"]:
-                raise PreventUpdate()
-            elif index == 0 and page_store["page"] == 1:
-                raise PreventUpdate()
-            elif index == total_pages + 1 and page_store["page"] == total_pages:
-                raise PreventUpdate()
-            elif index == 0 and page_store["page"] > 1:
-                page_store["page"] -= 1
-            elif index == total_pages + 1 and page_store["page"] < total_pages:
-                page_store["page"] += 1
-            elif index > 0 and index < total_pages + 1:
-                page_store["page"] = index
-
-        return (
-            [
-                html.Tr(
-                    [
-                        html.Td(row.id, className="align-middle"),
-                        html.Td(row.full_name, className="align-middle"),
-                        html.Td(row.email, className="align-middle"),
-                        html.Td(str(row.is_active), className="align-middle"),
-                        html.Td(str(row.is_superuser), className="align-middle"),
-                        html.Td(
-                            dcc.Link(
-                                html.Button("Update User", className="btn btn-primary"),
-                                href=f"/users/{row.id}",
-                            ),
-                            className="text-center",
-                        ),
-                    ],
-                    className="even" if idx % 2 == 0 else "odd",
-                )
-                for idx, row in enumerate(users)
-            ],
-            generate_entries_text(page_store["page"], value, n_rows),
-            generate_pagination("users", page_store["page"], n_rows, value),
-            page_store,
+        users = CRUDUser.get_multi(
+            db, limit=rows_per_page, skip=(page - 1) * rows_per_page
         )
+        n_rows = CRUDUser.count(db)
+        return [
+            {
+                "id": user.id,
+                "full_name": user.full_name,
+                "email": user.email,
+                "is_active": user.is_active,
+                "is_superuser": user.is_superuser,
+                "update_user": {"href": f"/users/{user.id}", "text": "Update User"},
+            }
+            for user in users
+        ], n_rows
     finally:
         db.close()
